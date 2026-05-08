@@ -1,5 +1,5 @@
 import React from 'react';
-
+import AccessibleIconButton from "./ui/AccessibleIconButton";
 interface HushhIDHeroProps {
   userName?: string;
   onCreateClick: () => void;
@@ -67,16 +67,11 @@ export const HushhIDHero: React.FC<HushhIDHeroProps> = ({
 
         {/* CTA area */}
         <div className="mt-6 space-y-3">
-          <button
-            onClick={onCreateClick}
-            className="w-full h-[54px] rounded-[16px] text-[#0B1120] text-[17px] font-semibold tracking-[0.01em] transition-[transform,filter] duration-150 active:scale-[0.985] active:brightness-[0.94] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B1120] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-            style={{
-              background: 'linear-gradient(to right, #00A9E0, #6DD3EF)',
-              fontWeight: 500,
-            }}
-          >
-            Create Your Hushh ID →
-          </button>
+          <AccessibleIconButton
+  label="Create Hushh ID"
+  onClick={onCreateClick}
+  className="w-full h-[54px] rounded-[16px] text-[#0B1120] text-[17px] font-semibold tracking-[0.01em] transition-[transform,filter] duration-150 active:scale-[0.985] active:brightness-[0.94]"
+></AccessibleIconButton>
           <p className="text-[13px] leading-[1.45] text-[#6B7280]">
             Takes under a minute. Your details stay private.
           </p>
