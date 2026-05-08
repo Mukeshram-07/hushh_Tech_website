@@ -5,10 +5,12 @@ import App from './App.tsx'
 import ErrorBoundary from './components/ErrorBoundary.tsx'
 import './index.css'
 import config from './resources/config/config.ts'
+import { registerGlobalErrorHandlers } from './utils/registerGlobalErrorHandlers';
+
 
 // Initialize i18n for multi-language support
 import './i18n'
-
+registerGlobalErrorHandlers(); 
 // ─── App Version ────────────────────────────────────────────────────────────
 // Expose version globally so team can check via DevTools console:
 //   Type: __HUSHH_VERSION__  →  { version, built, commit }
