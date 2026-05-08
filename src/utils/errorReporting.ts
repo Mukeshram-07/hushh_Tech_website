@@ -13,9 +13,21 @@ export function normalizeError(error: unknown): NormalizedError {
     };
   }
 
-  return {
-    message: String(error),
-  };
+  if (typeof error === 'object' && error !== null) {
+  try {
+    return {
+      message: JSON.stringify(error),
+    };
+  } catch {
+    return {
+      message: '[Unserializable object error]',
+    };
+  }
+  }
+
+return {
+  message: String(error),
+};
 }
 
 export function reportClientError(
