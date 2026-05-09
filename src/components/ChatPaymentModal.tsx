@@ -32,7 +32,10 @@ export function ChatPaymentModal({ isOpen, onClose, onPayment, isProcessing = fa
     <Modal isOpen={isOpen} onClose={onClose} size="md" isCentered>
       <ModalOverlay backdropFilter="blur(4px)" />
       <ModalContent borderRadius="16px" mx={4}>
-        <ModalCloseButton />
+        <ModalCloseButton
+          aria-label="Close payment modal"
+        className="focus-visible:ring-2 focus-visible:ring-offset-2"
+        />
         <ModalHeader pt={6} pb={2}>
           <HStack spacing={2}>
             <Icon as={MessageCircle} boxSize={6} color="blue.500" />
