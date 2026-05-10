@@ -34,7 +34,10 @@ export function ChatPaymentModal({ isOpen, onClose, onPayment, isProcessing = fa
       <ModalContent borderRadius="16px" mx={4}>
         <ModalCloseButton
           aria-label="Close payment modal"
-        className="focus-visible:ring-2 focus-visible:ring-offset-2"
+          _focusVisible={{
+            boxShadow: "0 0 0 2px var(--chakra-colors-blue-500)",
+            outline: "none",
+          }}
         />
         <ModalHeader pt={6} pb={2}>
           <HStack spacing={2}>
