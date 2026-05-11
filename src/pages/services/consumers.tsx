@@ -2,8 +2,8 @@ import {
   Box,
   Button,
   Divider,
+  Flex,
   Heading,
-  HStack,
   List,
   ListItem,
   Text,
@@ -35,10 +35,10 @@ const Consumers = () => {
         <Heading
           fontWeight={"700"}
           lineHeight={"1.2"}
-          fontSize={{ md: "1.25rem", base: "0.65rem" }}
+          fontSize={{ md: "1.25rem", base: "0.875rem" }}
           as={"h1"}
           color={"rgba(61,61,145,1)"}
-          mt={{md:'4rem',base:'2rem'}}
+          mt={{ md: "4rem", base: "2rem" }}
         >
           For Consumers
         </Heading>
@@ -49,31 +49,40 @@ const Consumers = () => {
           as={"h2"}
           color={"#1c1c1c"}
         >
-          Own Your Data, <br></br> Unlock Its Value{" "}
+          Own Your Data, <br /> Unlock Its Value{" "}
         </Text>
         <Text
           color={"#434343"}
           fontWeight={"700"}
           lineHeight={"1.2"}
-          fontSize={{ md: "1.5rem", base: "0.8rem" }}
+          fontSize={{ md: "1.5rem", base: "0.875rem" }}
         >
           Your Data, Your Rules. Get Rewarded for What You Share.
         </Text>
         <Text
           fontWeight={"400"}
-          fontSize={{ md: "1rem", base: "0.5rem" }}
+          fontSize={{ md: "1rem", base: "0.8rem" }}
           lineHeight={"1.2"}
         >
           Take control of your digital footprint and unlock personalized
           experiences and exclusive rewards with Hushh's suite of products.
         </Text>
-        <HStack spacing={4} justifyContent="center" w="100%" minW={"100%"}>
+
+        {/* Priority 4 — Top product cards: HStack → Flex responsive */}
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          spacing={4}
+          gap={{ md: "1rem", base: "1rem" }}
+          justifyContent="center"
+          w="100%"
+          px={{ base: "1rem", md: "0" }}
+          alignItems="center"
+        >
           <Box
             bg="black"
             color="white"
             borderRadius="3xl"
             overflow="hidden"
-            // maxW="sm"
             textAlign="center"
           >
             <Image
@@ -82,22 +91,12 @@ const Consumers = () => {
               width={"340px"}
               height={"220px"}
             />
-            <Box
-              p={4}
-              bg={"rgba(28,28,28,1)"}
-              color={"white"}
-            >
-              <Text
-                fontWeight="400"
-                fontSize={{ md: "0.75rem", base: "0.45rem" }}
-              >
+            <Box p={4} bg={"rgba(28,28,28,1)"} color={"white"}>
+              <Text fontWeight="400" fontSize={{ md: "0.75rem", base: "0.75rem" }}>
                 Hushh Companion
               </Text>
-              <Text
-                fontWeight={"600"}
-                fontSize={{ md: "1.25rem", base: "0.75rem" }}
-              >
-                Track Your Digital <br></br> Footprint
+              <Text fontWeight={"600"} fontSize={{ md: "1.25rem", base: "1rem" }}>
+                Track Your Digital <br /> Footprint
               </Text>
             </Box>
           </Box>
@@ -107,7 +106,6 @@ const Consumers = () => {
             color="white"
             borderRadius="3xl"
             overflow="hidden"
-            // maxW="sm"
             textAlign="center"
           >
             <Image
@@ -117,17 +115,11 @@ const Consumers = () => {
               height={"370px"}
             />
             <Box p={4} bg={"rgba(28,28,28,1)"} color={"white"}>
-              <Text
-                fontWeight="400"
-                fontSize={{ md: "0.75rem", base: "0.45rem" }}
-              >
+              <Text fontWeight="400" fontSize={{ md: "0.75rem", base: "0.75rem" }}>
                 Hushh Wallet
               </Text>
-              <Text
-                fontWeight={"600"}
-                fontSize={{ md: "1.25rem", base: "0.75rem" }}
-              >
-                Your Personal Data, <br></br> Your Powerhouse
+              <Text fontWeight={"600"} fontSize={{ md: "1.25rem", base: "1rem" }}>
+                Your Personal Data, <br /> Your Powerhouse
               </Text>
             </Box>
           </Box>
@@ -137,7 +129,6 @@ const Consumers = () => {
             color="white"
             borderRadius="3xl"
             overflow="hidden"
-            // maxW="sm"
             textAlign="center"
           >
             <Image
@@ -147,30 +138,25 @@ const Consumers = () => {
               height={"220px"}
             />
             <Box p={4} bg={"rgba(28,28,28,1)"} color={"white"}>
-              <Text
-                fontWeight="400"
-                fontSize={{ md: "0.75rem", base: "0.45rem" }}
-              >
+              <Text fontWeight="400" fontSize={{ md: "0.75rem", base: "0.75rem" }}>
                 Vibe Search
               </Text>
-              <Text
-                fontWeight={"600"}
-                fontSize={{ md: "1.25rem", base: "0.75rem" }}
-              >
-                Stop Scrolling, <br></br> Start Discovering!
+              <Text fontWeight={"600"} fontSize={{ md: "1.25rem", base: "1rem" }}>
+                Stop Scrolling, <br /> Start Discovering!
               </Text>
             </Box>
           </Box>
-        </HStack>
+        </Flex>
       </Box>
 
-      <HStack
+      {/* Priority 4 — Wallet video section: HStack → Flex responsive */}
+      <Flex
+        direction={{ base: "column", md: "row" }}
         bg={"#D9D2E9"}
-                  px={{md:'10rem',base:'0'}}
+        px={{ md: "10rem", base: "1rem" }}
         mt={{ md: "3rem", base: "1rem" }}
-        gap={{ md: "6rem", base: "1rem" }}
-        padding={{ md: "2rem", base: "0.5" }}
-        spacing={4}
+        gap={{ md: "6rem", base: "1.5rem" }}
+        padding={{ md: "2rem", base: "1rem" }}
         alignItems={"center"}
         w={"100%"}
       >
@@ -182,6 +168,7 @@ const Consumers = () => {
           overflow="hidden"
           position="relative"
           paddingBottom="56.25%"
+          flexShrink={0}
         >
           <iframe
             src="https://www.youtube.com/embed/igf1PYq1WOM"
@@ -196,11 +183,10 @@ const Consumers = () => {
               width: "100%",
               height: "85%",
             }}
-          ></iframe>
+          />
         </Box>
 
         <Box
-          // maxW={{ md: "35rem", base: "100%" }}
           p={4}
           textAlign={"left"}
           display={"flex"}
@@ -220,7 +206,7 @@ const Consumers = () => {
             color={"#666666"}
             fontWeight={"400"}
             lineHeight={"1.2"}
-            fontSize={{ md: "1rem", base: "0.65rem" }}
+            fontSize={{ md: "1rem", base: "0.875rem" }}
           >
             You walk into your favorite store, and the sales agent understands
             your style, size, and even your vibe. They offer you personalized
@@ -231,12 +217,12 @@ const Consumers = () => {
             color={"#666666"}
             fontWeight={"700"}
             lineHeight={"1.2"}
-            fontSize={{ md: "1rem", base: "0.65rem" }}
+            fontSize={{ md: "1rem", base: "0.875rem" }}
           >
             This is the power of Hushh Wallet.
           </Text>
         </Box>
-      </HStack>
+      </Flex>
 
       <VStack bg={"#F5F5F7"} p={{ md: "4rem", base: "1rem" }}>
         <Text
@@ -248,7 +234,7 @@ const Consumers = () => {
           Hushh Wallet
         </Text>
         <Text
-          fontSize={{ md: "1.16rem", base: "0.65rem" }}
+          fontSize={{ md: "1.16rem", base: "0.8rem" }}
           color={"#434343"}
           fontWeight={"600"}
           lineHeight={"1.2"}
@@ -260,7 +246,7 @@ const Consumers = () => {
         <Text
           color={"#434343"}
           fontWeight={"400"}
-          fontSize={{ md: "1.5rem", base: "0.75rem" }}
+          fontSize={{ md: "1.5rem", base: "0.875rem" }}
           lineHeight={"1.2"}
         >
           We live in a{" "}
@@ -269,7 +255,7 @@ const Consumers = () => {
         <Text
           color={"#434343"}
           fontWeight={"400"}
-          fontSize={{ md: "1.5rem", base: "0.75rem" }}
+          fontSize={{ md: "1.5rem", base: "0.875rem" }}
           lineHeight={"1.2"}
         >
           Every online interaction, every purchase, every click leaves a digital
@@ -278,7 +264,7 @@ const Consumers = () => {
         <Text
           color={"#434343"}
           fontWeight={"400"}
-          fontSize={{ md: "1.5rem", base: "0.75rem" }}
+          fontSize={{ md: "1.5rem", base: "0.875rem" }}
           lineHeight={"1.2"}
         >
           Hushh Wallet empowers you to{" "}
@@ -295,6 +281,7 @@ const Consumers = () => {
         flexDirection="row"
         p={{ md: "4rem", base: "1rem" }}
         display="flex"
+        flexWrap="wrap"
         justifyContent="center"
       >
         <AccordionItem>
@@ -307,12 +294,14 @@ const Consumers = () => {
             borderRadius="md"
             textAlign="center"
           >
+            {/* Priority 6 — minH on AccordionButton */}
             <AccordionButton
               display="flex"
               flexDirection="column"
               justifyContent="space-between"
               alignItems="center"
               h="100%"
+              minH="44px"
             >
               <Box
                 as="span"
@@ -323,7 +312,9 @@ const Consumers = () => {
               >
                 Unify your Scattered Data
               </Box>
+              {/* Priority 6 — aria-hidden on icon */}
               <ChevronDownIcon
+                aria-hidden="true"
                 style={{
                   background: "#5f6368",
                   color: "white",
@@ -356,6 +347,7 @@ const Consumers = () => {
               justifyContent="space-between"
               alignItems="center"
               h="100%"
+              minH="44px"
             >
               <Box
                 as="span"
@@ -367,6 +359,7 @@ const Consumers = () => {
                 Curate your Identity
               </Box>
               <ChevronDownIcon
+                aria-hidden="true"
                 style={{
                   background: "#5f6368",
                   color: "white",
@@ -398,6 +391,7 @@ const Consumers = () => {
               justifyContent="space-between"
               alignItems="center"
               h="100%"
+              minH="44px"
             >
               <Box
                 as="span"
@@ -409,6 +403,7 @@ const Consumers = () => {
                 Unlock Personalized Experiences
               </Box>
               <ChevronDownIcon
+                aria-hidden="true"
                 style={{
                   background: "#5f6368",
                   color: "white",
@@ -440,6 +435,7 @@ const Consumers = () => {
               justifyContent="space-between"
               alignItems="center"
               h="100%"
+              minH="44px"
             >
               <Box
                 as="span"
@@ -451,6 +447,7 @@ const Consumers = () => {
                 Get Rewarded
               </Box>
               <ChevronDownIcon
+                aria-hidden="true"
                 style={{
                   background: "#5f6368",
                   color: "white",
@@ -482,6 +479,7 @@ const Consumers = () => {
               justifyContent="space-between"
               alignItems="center"
               h="100%"
+              minH="44px"
             >
               <Box
                 as="span"
@@ -493,6 +491,7 @@ const Consumers = () => {
                 Transparency and Control
               </Box>
               <ChevronDownIcon
+                aria-hidden="true"
                 style={{
                   background: "#5f6368",
                   color: "white",
@@ -510,54 +509,76 @@ const Consumers = () => {
         </AccordionItem>
       </Accordion>
 
-      <HStack
+      {/* Priority 4 — Wallet video section: HStack → Flex responsive */}
+      {/* Priority 1 — Responsive iframe for Hushh Wallet video */}
+      <Flex
+        direction={{ base: "column", md: "row" }}
         my={{ md: "2rem", base: "1rem" }}
         alignItems={"center"}
         justifyContent={"center"}
-        gap={{ md: "4rem", base: "1rem" }}
+        gap={{ md: "4rem", base: "1.5rem" }}
+        px={{ base: "1rem", md: "0" }}
       >
         <Text
           fontWeight={"700"}
           lineHeight={"1.2"}
           color={"rgba(28,28,28,1)"}
           fontSize={{ md: "2rem", base: "1rem" }}
+          textAlign={{ base: "center", md: "left" }}
         >
-          {" "}
-          Glimpse into Hushh Wallet{" "}
+          Glimpse into Hushh Wallet
         </Text>
-        <iframe
-          style={{ borderRadius: "15px" }}
-          width="828"
-          height="550"
-          src="https://www.youtube.com/embed/WYppPoOSi7k?si=yMlu5PUzuZhueJZm"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
-      </HStack>
+        <Box
+          width="100%"
+          maxW="828px"
+          position="relative"
+          paddingBottom="56.25%"
+          height="0"
+          overflow="hidden"
+          borderRadius="15px"
+          flexShrink={0}
+        >
+          <iframe
+            src="https://www.youtube.com/embed/WYppPoOSi7k?si=yMlu5PUzuZhueJZm"
+            title="Hushh Wallet Demo"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              borderRadius: "15px",
+            }}
+          />
+        </Box>
+      </Flex>
 
       <VStack
         my={{ md: "8rem", base: "1rem" }}
         alignItems={"center"}
         justifyContent={"center"}
       >
-        <HStack
+        <Flex
+          direction={{ base: "column", md: "row" }}
           alignItems={"center"}
           justifyContent={"center"}
-          gap={{ md: "4rem", base: "1rem" }}
+          gap={{ md: "4rem", base: "1.5rem" }}
           bg={"rgba(0,0,0,0)"}
           mx={{ md: "6rem", base: "1rem" }}
+          textAlign={{ base: "center", md: "left" }}
         >
           <Text
             fontWeight={"700"}
             lineHeight={"1.2"}
             color={"#434343"}
-            fontSize={{ md: "1.5rem", base: "0.65rem" }}
+            fontSize={{ md: "1.5rem", base: "0.875rem" }}
           >
             Hushh Wallet is more than just an app; it's a movement.
-            <br></br>
+            <br />
             Download and unlock the true power of your personal data.
           </Text>
           <Image
@@ -565,9 +586,9 @@ const Consumers = () => {
             alt="Hushh Wallet QR Code"
             boxSize={{ md: "16rem", base: "100px" }}
           />
-        </HStack>
+        </Flex>
         <Button
-          maxW={{ md: "680px", base: "8rem" }}
+          maxW={{ md: "680px", base: "90%" }}
           px={"12px"}
           bg={"rgba(153, 40, 112, 1)"}
           color={"white"}
@@ -605,10 +626,10 @@ const Consumers = () => {
           color={"#434343"}
           fontWeight={"600"}
           lineHeight={"1.2"}
-          fontSize={{ md: "1.17rem", base: "0.65rem" }}
+          fontSize={{ md: "1.17rem", base: "0.8rem" }}
         >
           More than just a Chrome extension – it's your personal companion for a
-          smarter, <br></br> more organized digital life.{" "}
+          smarter, <br /> more organized digital life.{" "}
         </Text>
         <Accordion
           allowToggle
@@ -617,6 +638,7 @@ const Consumers = () => {
           flexDirection="row"
           p={{ md: "4rem", base: "1rem" }}
           display="flex"
+          flexWrap="wrap"
           justifyContent="center"
           gap={{ md: "6rem", base: "1rem" }}
         >
@@ -635,6 +657,7 @@ const Consumers = () => {
                 justifyContent="space-between"
                 alignItems="center"
                 h="100%"
+                minH="44px"
               >
                 <Box
                   as="span"
@@ -643,9 +666,10 @@ const Consumers = () => {
                   fontSize={{ md: "1.5rem", base: "1rem" }}
                   alignSelf="flex-start"
                 >
-                  Discover Your <br></br> Digital Self
+                  Discover Your <br /> Digital Self
                 </Box>
                 <ChevronDownIcon
+                  aria-hidden="true"
                   style={{
                     background: "#5f6368",
                     color: "white",
@@ -691,6 +715,7 @@ const Consumers = () => {
                 justifyContent="space-between"
                 alignItems="center"
                 h="100%"
+                minH="44px"
               >
                 <Box
                   as="span"
@@ -699,9 +724,10 @@ const Consumers = () => {
                   fontSize={{ md: "1.5rem", base: "1rem" }}
                   alignSelf="flex-start"
                 >
-                  Shop Smarter, <br></br> Not Harder
+                  Shop Smarter, <br /> Not Harder
                 </Box>
                 <ChevronDownIcon
+                  aria-hidden="true"
                   style={{
                     background: "#5f6368",
                     color: "white",
@@ -747,6 +773,7 @@ const Consumers = () => {
                 justifyContent="space-between"
                 alignItems="center"
                 h="100%"
+                minH="44px"
               >
                 <Box
                   as="span"
@@ -755,9 +782,10 @@ const Consumers = () => {
                   fontSize={{ md: "1.5rem", base: "1rem" }}
                   alignSelf="flex-start"
                 >
-                  Your Data, <br></br> Your Way
+                  Your Data, <br /> Your Way
                 </Box>
                 <ChevronDownIcon
+                  aria-hidden="true"
                   style={{
                     background: "#5f6368",
                     color: "white",
@@ -790,49 +818,70 @@ const Consumers = () => {
         </Accordion>
       </VStack>
 
-      <HStack
+      {/* Priority 2 — Companion iframe: responsive wrapper */}
+      {/* Priority 4 — Companion section: HStack → Flex responsive */}
+      <Flex
+        direction={{ base: "column", md: "row" }}
         my={{ md: "2rem", base: "1rem" }}
         alignItems={"center"}
         justifyContent={"center"}
-        gap={{ md: "4rem", base: "1rem" }}
+        gap={{ md: "4rem", base: "1.5rem" }}
+        px={{ base: "1rem", md: "0" }}
       >
-        <iframe
-          style={{ borderRadius: "15px" }}
-          width="728"
-          height="550"
-          src="https://www.youtube.com/embed/371l4LVRcwo?si=RcUlPxi17GAUWJLS"
-          title="Hushh Browser Companion"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
-        <Image src="/images/browserCompanion.png" alt="Hushh Broswer Companion" />
-      </HStack>
+        <Box
+          width="100%"
+          maxW="728px"
+          position="relative"
+          paddingBottom="56.25%"
+          height="0"
+          overflow="hidden"
+          borderRadius="15px"
+          flexShrink={0}
+        >
+          <iframe
+            src="https://www.youtube.com/embed/371l4LVRcwo?si=RcUlPxi17GAUWJLS"
+            title="Hushh Browser Companion"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              borderRadius: "15px",
+            }}
+          />
+        </Box>
+        <Image src="/images/browserCompanion.png" alt="Hushh Browser Companion" />
+      </Flex>
 
       <VStack
         my={{ md: "8rem", base: "1rem" }}
         alignItems={"center"}
         justifyContent={"center"}
       >
-        <HStack
+        <Flex
+          direction={{ base: "column", md: "row" }}
           alignItems={"center"}
           justifyContent={"center"}
-          gap={{ md: "4rem", base: "1rem" }}
+          gap={{ md: "4rem", base: "1.5rem" }}
           bg={"rgba(0,0,0,0)"}
-          textAlign={"right"}
+          textAlign={{ base: "center", md: "right" }}
           mx={{ md: "6rem", base: "1rem" }}
         >
           <Text
             fontWeight={"700"}
             lineHeight={"1.2"}
             color={"#434343"}
-            fontSize={{ md: "1.5rem", base: "0.65rem" }}
+            fontSize={{ md: "1.5rem", base: "0.875rem" }}
           >
             Ready to enhance your digital journey? Add Hushh Companion
-            <br></br>
+            <br />
             to Chrome today and start exploring the web on your own
-            <br></br>
+            <br />
             terms!
           </Text>
           <Image
@@ -840,9 +889,9 @@ const Consumers = () => {
             alt="Hushh Browser Companion"
             boxSize={{ md: "16rem", base: "100px" }}
           />
-        </HStack>
+        </Flex>
         <Button
-          maxW={{ md: "680px", base: "8rem" }}
+          maxW={{ md: "680px", base: "90%" }}
           px={"12px"}
           bg={"rgba(153, 40, 112, 1)"}
           color={"white"}
@@ -875,8 +924,8 @@ const Consumers = () => {
           fontWeight={"600"}
           lineHeight={"1.2"}
           color={"#434343"}
-          mt={{md:'1rem',base:'0.5rem'}}
-          fontSize={{ md: "1.1rem", base: "0.55rem" }}
+          mt={{ md: "1rem", base: "0.5rem" }}
+          fontSize={{ md: "1.1rem", base: "0.8rem" }}
         >
           Stop Searching, Start Vibing.
         </Text>
@@ -884,29 +933,60 @@ const Consumers = () => {
           fontWeight={"600"}
           lineHeight={"1.2"}
           color={"#434343"}
-          fontSize={{ md: "1.1rem", base: "0.55rem" }}
+          fontSize={{ md: "1.1rem", base: "0.8rem" }}
         >
-          Find your perfect outfit effortlessly <br></br>with AI-powered fashion
+          Find your perfect outfit effortlessly <br />with AI-powered fashion
           search.
         </Text>
-        <HStack  my={{md:'2.5rem',base:'1.5rem'}} gap={{md:'8rem',base:'2.5rem'}} px={{md:'12rem',base:'1rem'}} boxSizing="border-box" width={'100%'}>
-          <iframe
-            width="360"
-            height="615"
-            src="https://www.youtube.com/embed/gGFm5QVsJwg?si=LIBm-M3--HA10I7g"
-            title="YouTube video player"
-            frameborder="0"
-            style={{borderRadius:'10px'}}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-          <VStack flex={1} gap={{md:'1.25rem',base:'0.65rem'}} textAlign={'left'} alignItems={'flex-start'}>
+
+        {/* Priority 3 & 4 — Vibe Search video 1: responsive iframe + Flex layout */}
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          my={{ md: "2.5rem", base: "1.5rem" }}
+          gap={{ md: "8rem", base: "1.5rem" }}
+          px={{ md: "12rem", base: "1rem" }}
+          boxSizing="border-box"
+          width={"100%"}
+          alignItems="center"
+        >
+          <Box
+            width="100%"
+            maxW="360px"
+            position="relative"
+            paddingBottom="171.67%"
+            height="0"
+            overflow="hidden"
+            borderRadius="10px"
+            flexShrink={0}
+          >
+            <iframe
+              src="https://www.youtube.com/embed/gGFm5QVsJwg?si=LIBm-M3--HA10I7g"
+              title="Vibe Search Demo"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                borderRadius: "10px",
+              }}
+            />
+          </Box>
+          <VStack
+            flex={1}
+            gap={{ md: "1.25rem", base: "0.875rem" }}
+            textAlign={"left"}
+            alignItems={"flex-start"}
+          >
             <Text
               fontWeight={"700"}
               lineHeight={"1.2"}
               color={"rgba(28,28,28,1)"}
-              fontSize={{ md: "1.5rem", base: "0.65rem" }}
+              fontSize={{ md: "1.5rem", base: "0.875rem" }}
             >
               Unleash the Power of AI Search
             </Text>
@@ -914,7 +994,7 @@ const Consumers = () => {
               fontWeight={"400"}
               lineHeight={"1.2"}
               color={"rgba(28,28,28,1)"}
-              fontSize={{ md: "1rem", base: "0.5rem" }}
+              fontSize={{ md: "1rem", base: "0.8rem" }}
             >
               Describe what you want using natural language - "boho summer
               dress," "Dark academia aesthetic outfits for fall," "minimal
@@ -925,7 +1005,7 @@ const Consumers = () => {
               fontWeight={"400"}
               lineHeight={"1.2"}
               color={"rgba(28,28,28,1)"}
-              fontSize={{ md: "1rem", base: "0.5rem" }}
+              fontSize={{ md: "1rem", base: "0.8rem" }}
             >
               See a look you love? Upload the picture and instantly discover
               similar items.
@@ -934,85 +1014,154 @@ const Consumers = () => {
               fontWeight={"400"}
               lineHeight={"1.2"}
               color={"rgba(28,28,28,1)"}
-              fontSize={{ md: "1rem", base: "0.5rem" }}
+              fontSize={{ md: "1rem", base: "0.8rem" }}
             >
               No more keyword stuffing – Vibe Search gets you there faster and
               more accurately.
             </Text>
           </VStack>
-        </HStack>
+        </Flex>
       </VStack>
 
-      <HStack my={{ md: "2rem", base: "1rem" }} px={{md:'12rem',base:'0.5rem'}}>
-        <VStack textAlign={'left'} alignItems={'flex-start'} justifyContent={'flex-start'}>
-          <Text fontWeight={'700'} lineHeight={'1.2'} color={'rgba(153,40,112,1)'} fontSize={{md:'1.5rem',base:'0.75rem'}}>Try Vibe Search Now</Text>
-          <Text mt={{md:'1.5rem',base:'0.5rem'}} fontWeight={'400'} fontSize={{md:'1rem',base:'0.5rem'}} lineHeight={'1.2'}>Example Queries: </Text>
-          <UnorderedList gap={{md:'1rem',base:'0.5rem'}} display={'flex'} flexDirection={'column'} fontWeight={'400'} fontSize={{md:'1rem',base:'0.5rem'}} lineHeight={'1.2'}>
-             <ListItem>Boho Summer Dress</ListItem>
-             <ListItem>Casual Summer Dress</ListItem>
-             <ListItem>Minimal Office Outfit</ListItem>
-             <ListItem>Bold Office Outfits for Women</ListItem>
-             <ListItem>Dresses for a Summer Beach Party</ListItem>
-             <ListItem>Ball Dresses</ListItem>
-             <ListItem>Streetwear for Men</ListItem>
-             <ListItem>Floral and Striped Dresses</ListItem>
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        my={{ md: "2rem", base: "1rem" }}
+        px={{ md: "12rem", base: "1rem" }}
+        gap={{ md: "4rem", base: "1.5rem" }}
+        alignItems="flex-start"
+      >
+        <VStack textAlign={"left"} alignItems={"flex-start"} justifyContent={"flex-start"}>
+          <Text
+            fontWeight={"700"}
+            lineHeight={"1.2"}
+            color={"rgba(153,40,112,1)"}
+            fontSize={{ md: "1.5rem", base: "0.875rem" }}
+          >
+            Try Vibe Search Now
+          </Text>
+          <Text
+            mt={{ md: "1.5rem", base: "0.5rem" }}
+            fontWeight={"400"}
+            fontSize={{ md: "1rem", base: "0.8rem" }}
+            lineHeight={"1.2"}
+          >
+            Example Queries:{" "}
+          </Text>
+          <UnorderedList
+            gap={{ md: "1rem", base: "0.5rem" }}
+            display={"flex"}
+            flexDirection={"column"}
+            fontWeight={"400"}
+            fontSize={{ md: "1rem", base: "0.8rem" }}
+            lineHeight={"1.2"}
+          >
+            <ListItem>Boho Summer Dress</ListItem>
+            <ListItem>Casual Summer Dress</ListItem>
+            <ListItem>Minimal Office Outfit</ListItem>
+            <ListItem>Bold Office Outfits for Women</ListItem>
+            <ListItem>Dresses for a Summer Beach Party</ListItem>
+            <ListItem>Ball Dresses</ListItem>
+            <ListItem>Streetwear for Men</ListItem>
+            <ListItem>Floral and Striped Dresses</ListItem>
           </UnorderedList>
         </VStack>
+      </Flex>
 
-
-      </HStack>
- <HStack my={{md:'2.5rem',base:'1.5rem'}} gap={{md:'14rem',base:'2.5rem'}} px={{md:'12rem',base:'1rem'}} boxSizing="border-box" width={'100%'}>
+      {/* Priority 3 & 4 — Vibe Search video 2: responsive iframe + Flex layout */}
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        my={{ md: "2.5rem", base: "1.5rem" }}
+        gap={{ md: "14rem", base: "1.5rem" }}
+        px={{ md: "12rem", base: "1rem" }}
+        boxSizing="border-box"
+        width={"100%"}
+        alignItems="center"
+      >
+        <Box
+          width="100%"
+          maxW="360px"
+          position="relative"
+          paddingBottom="171.67%"
+          height="0"
+          overflow="hidden"
+          borderRadius="10px"
+          flexShrink={0}
+        >
           <iframe
-            width="360"
-            height="615"
-            src="https://www.youtube.com/embed/4tH9j6kIQ0Q?si=3kp9oBbXRdh7Ewab" 
-            title="YouTube video player"
-            frameborder="0"
-            style={{borderRadius:'10px'}}
+            src="https://www.youtube.com/embed/4tH9j6kIQ0Q?si=3kp9oBbXRdh7Ewab"
+            title="Vibe Search Personalization"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-          <VStack flex={1} gap={{md:'1.25rem',base:'0.65rem'}} textAlign={'left'} alignItems={'flex-start'}>
-            <Text
-              fontWeight={"700"}
-              lineHeight={"1.2"}
-              color={"rgba(28,28,28,1)"}
-              fontSize={{ md: "1.5rem", base: "0.65rem" }}
-            >
-              Personalization That Gets You
-            </Text>
-            <Text
-              fontWeight={"400"}
-              lineHeight={"1.2"}
-              color={"rgba(28,28,28,1)"}
-              fontSize={{ md: "1rem", base: "0.5rem" }}
-            >
-              <span style={{fontWeight:'500'}}>Your Style, Your Feed:</span> Vibe Search learns what you love. The more you interact, the more tailored your results become.
-            </Text>
-            <Text
-              fontWeight={"400"}
-              lineHeight={"1.2"}
-              color={"rgba(28,28,28,1)"}
-              fontSize={{ md: "1rem", base: "0.5rem" }}
-            >
-              <span style={{fontWeight:'500'}}>Effortless Discovery:</span> Just browse and like products – Vibe Search personalizes your experience automatically.
-            </Text>
-            <Text
-              fontWeight={"400"}
-              lineHeight={"1.2"}
-              color={"rgba(28,28,28,1)"}
-              fontSize={{ md: "1rem", base: "0.5rem" }}
-            >
-              <span style={{fontWeight:'500'}}>Control Your Style Journey: </span>Soon you'll be able to fine-tune your preferences for ultimate control.
-            </Text>
-          </VStack>
-        </HStack>
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              borderRadius: "10px",
+            }}
+          />
+        </Box>
+        <VStack
+          flex={1}
+          gap={{ md: "1.25rem", base: "0.875rem" }}
+          textAlign={"left"}
+          alignItems={"flex-start"}
+        >
+          <Text
+            fontWeight={"700"}
+            lineHeight={"1.2"}
+            color={"rgba(28,28,28,1)"}
+            fontSize={{ md: "1.5rem", base: "0.875rem" }}
+          >
+            Personalization That Gets You
+          </Text>
+          <Text
+            fontWeight={"400"}
+            lineHeight={"1.2"}
+            color={"rgba(28,28,28,1)"}
+            fontSize={{ md: "1rem", base: "0.8rem" }}
+          >
+            <span style={{ fontWeight: "500" }}>Your Style, Your Feed:</span>{" "}
+            Vibe Search learns what you love. The more you interact, the more
+            tailored your results become.
+          </Text>
+          <Text
+            fontWeight={"400"}
+            lineHeight={"1.2"}
+            color={"rgba(28,28,28,1)"}
+            fontSize={{ md: "1rem", base: "0.8rem" }}
+          >
+            <span style={{ fontWeight: "500" }}>Effortless Discovery:</span>{" "}
+            Just browse and like products – Vibe Search personalizes your
+            experience automatically.
+          </Text>
+          <Text
+            fontWeight={"400"}
+            lineHeight={"1.2"}
+            color={"rgba(28,28,28,1)"}
+            fontSize={{ md: "1rem", base: "0.8rem" }}
+          >
+            <span style={{ fontWeight: "500" }}>Control Your Style Journey:{" "}</span>
+            Soon you'll be able to fine-tune your preferences for ultimate
+            control.
+          </Text>
+        </VStack>
+      </Flex>
 
-        <VStack my={{md:'2rem',base:'1rem'}} textAlign={'center'} gap={{md:'2rem',base:'1rem'}}>
-          <Text color={'#434343'} fontSize={{md:'1.5rem',base:'0.75rem'}} fontWeight={'600'}>Ready to find your perfect fashion match? Start vibing with Vibe <br></br> Search today!</Text>
-           <Button
-          maxW={{ md: "680px", base: "8rem" }}
+      <VStack my={{ md: "2rem", base: "1rem" }} textAlign={"center"} gap={{ md: "2rem", base: "1rem" }}>
+        <Text
+          color={"#434343"}
+          fontSize={{ md: "1.5rem", base: "0.875rem" }}
+          fontWeight={"600"}
+        >
+          Ready to find your perfect fashion match? Start vibing with Vibe{" "}
+          <br /> Search today!
+        </Text>
+        <Button
+          maxW={{ md: "680px", base: "90%" }}
           px={"12px"}
           bg={"rgba(153, 40, 112, 1)"}
           color={"white"}
@@ -1026,9 +1175,10 @@ const Consumers = () => {
               "_blank"
             )
           }
-        >Schedule a demo to know more about Vibe Search
+        >
+          Schedule a demo to know more about Vibe Search
         </Button>
-        </VStack>
+      </VStack>
     </>
   );
 };
