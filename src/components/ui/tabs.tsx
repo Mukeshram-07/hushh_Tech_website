@@ -49,11 +49,18 @@ export const Tabs: React.FC<TabsProps> = ({
     <div className={className}>
       {React.Children.map(children, (child: any) => {
         if (child.type === TabsList) {
-          return React.cloneElement(child, { activeTab, setActiveTab, tabsId });
+          return React.cloneElement(child, {
+            activeTab,
+            setActiveTab,
+            tabsId,
+          });
         }
 
         if (child.type === TabsContent && child.props.value === activeTab) {
-          return React.cloneElement(child, { activeTab, tabsId });
+          return React.cloneElement(child, {
+            activeTab,
+            tabsId,
+          });
         }
 
         return null;
@@ -82,15 +89,19 @@ export const TabsList: React.FC<TabsListProps> = ({
       case "ArrowRight":
         nextIndex = (currentIndex + 1) % triggers.length;
         break;
+
       case "ArrowLeft":
         nextIndex = (currentIndex - 1 + triggers.length) % triggers.length;
         break;
+
       case "Home":
         nextIndex = 0;
         break;
+
       case "End":
         nextIndex = triggers.length - 1;
         break;
+
       default:
         return;
     }
@@ -140,7 +151,9 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({
       onClick={() => setActiveTab?.(value)}
       onKeyDown={onKeyDown}
       className={`px-4 py-2 rounded-lg min-h-[44px] ${
-        isActive ? "bg-blue-500 text-white" : "bg-gray-200 text-black"
+        isActive
+          ? "bg-blue-500 text-white"
+          : "bg-gray-200 text-black"
       }`}
     >
       {children}
