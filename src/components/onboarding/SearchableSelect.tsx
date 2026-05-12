@@ -256,6 +256,7 @@ export function SearchableSelect({
           aria-controls={listboxId}
           aria-activedescendant={activeOptionId}
           role="combobox"
+          aria-autocomplete="list"
           className={`h-12 w-full rounded-xl border bg-white px-4 pr-10 text-base text-slate-900 placeholder:text-slate-400 transition-all focus:border-[#2b8cee] focus:outline-none focus:ring-2 focus:ring-[#2b8cee]/20 ${
             disabled ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400' : 'border-slate-200'
           }`}
