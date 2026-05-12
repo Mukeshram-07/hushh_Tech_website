@@ -37,8 +37,8 @@ const faqs: FaqItem[] = [
   },
   {
     question: "What’s the biggest challenge Hu$$h faces, and how do you plan to address it?",
-    answer: "Our biggest challenge is managing growth without losing our soul. We’re gaining traction fast, and with that comes the risk of diluting our values as we scale. To address this, we’re committed to a few non-negotiables: transparency, ethical data use, and a human-centered approach. We’re building a strong core team that not only understands finance but is also deeply aligned with our vision. As we grow, we’ll be deliberate about who joins the Hu$$h family, ensuring that every addition strengthens our values rather than compromises them. Growth is only meaningful if it’s rooted in integrity."  
-  },  
+    answer: "Our biggest challenge is managing growth without losing our soul. We’re gaining traction fast, and with that comes the risk of diluting our values as we scale. To address this, we’re committed to a few non-negotiables: transparency, ethical data use, and a human-centered approach. We’re building a strong core team that not only understands finance but is also deeply aligned with our vision. As we grow, we’ll be deliberate about who joins the Hu$$h family, ensuring that every addition strengthens our values rather than compromises them. Growth is only meaningful if it’s rooted in integrity."
+  },
   {
     question: "Why should investors trust that Hu$$h’s results are sustainable over time?",
     answer: "Trust comes from discipline, and our discipline is unbreakable. We’re not just achieving returns by chasing the latest market trends; we’re doing it through structured, data-driven strategies that have proven resilient over time. Our options income strategy, our focus on high-free-cash-flow stocks, and our conservative approach to volatility capture are built to endure. We’re not promising the moon—we’re focused on realistic, consistent growth. Just as Apple created products that people could rely on, we’re creating a financial ecosystem that people can count on, year in and year out."
@@ -140,115 +140,116 @@ const FaqPage: React.FC = () => {
             const triggerId = `faq-trigger-${index}`;
 
             return (
-            <Box
-              key={index}
-              bg="white"
-              borderRadius="2xl"
-              overflow="hidden"
-              borderWidth="1px"
-              borderColor="gray.100"
-              boxShadow={
-                isOpen
-                  ? "0 4px 24px rgba(0, 0, 0, 0.08)"
-                  : "0 2px 12px rgba(0, 0, 0, 0.06)"
-              }
-              transition="box-shadow 0.2s ease, border-color 0.2s ease"
-              _hover={{
-                borderColor: "gray.200",
-                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.07)",
-              }}
-            >
-              <Heading
-                as="h3"
-                m={0}
-                fontFamily={bodyFont}
-                fontSize={{ base: "0.95rem", md: "1rem" }}
-                fontWeight="600"
-                lineHeight="snug"
+              <Box
+                key={index}
+                bg="white"
+                borderRadius="2xl"
+                overflow="hidden"
+                borderWidth="1px"
+                borderColor="gray.100"
+                boxShadow={
+                  isOpen
+                    ? "0 4px 24px rgba(0, 0, 0, 0.08)"
+                    : "0 2px 12px rgba(0, 0, 0, 0.06)"
+                }
+                transition="box-shadow 0.2s ease, border-color 0.2s ease"
+                _hover={{
+                  borderColor: "gray.200",
+                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.07)",
+                }}
               >
-                <Box role="group" w="100%">
-                  <Box
-                    as="button"
-                    type="button"
-                    id={triggerId}
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    onClick={() => toggleAccordion(index)}
-                    display="flex"
-                    w="100%"
-                    alignItems="flex-start"
-                    justifyContent="space-between"
-                    gap={4}
-                    px={{ base: 5, md: 6 }}
-                    py={{ base: 5, md: 6 }}
-                    cursor="pointer"
-                    border="none"
-                    bg="transparent"
-                    borderTopRadius="2xl"
-                    textAlign="left"
-                    font="inherit"
-                    color="gray.900"
-                    transition="background-color 0.2s ease, box-shadow 0.2s ease"
-                    _hover={{
-                      bg: "gray.50",
-                      boxShadow: "inset 0 0 0 1px rgba(0, 0, 0, 0.04)",
-                    }}
-                    _active={{
-                      bg: "gray.100",
-                    }}
-                    _focus={{ outline: "none" }}
-                    _focusVisible={{
-                      boxShadow:
-                        "inset 0 0 0 1px rgba(0, 0, 0, 0.04), 0 0 0 3px rgba(0, 169, 224, 0.45)",
-                    }}
-                  >
-                    <Box
-                      as="span"
-                      display="block"
-                      flex="1"
-                      pr={1}
-                      transition="color 0.2s ease"
-                      _groupHover={{ color: "black" }}
-                    >
-                      {faq.question}
-                    </Box>
-                    <Icon
-                      as={isOpen ? ChevronUpIcon : ChevronDownIcon}
-                      aria-hidden
-                      w={5}
-                      h={5}
-                      mt={0.5}
-                      flexShrink={0}
-                      color="gray.400"
-                      transition="color 0.2s ease, transform 0.2s ease"
-                      _groupHover={{
-                        color: "gray.600",
-                        transform: isOpen ? "translateY(-1px)" : "translateY(2px)",
-                      }}
-                    />
-                  </Box>
-                </Box>
-              </Heading>
-
-              {isOpen && (
-                <Box
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={triggerId}
-                  px={{ base: 5, md: 6 }}
-                  pb={{ base: 5, md: 6 }}
-                  pt={4}
-                  borderTopWidth="1px"
-                  borderTopColor="gray.100"
-                  color="gray.600"
-                  fontSize={{ base: "0.9375rem", md: "1rem" }}
-                  fontWeight="400"
-                  lineHeight="tall"
+                <Heading
+                  as="h3"
+                  m={0}
+                  fontFamily={bodyFont}
+                  fontSize={{ base: "0.95rem", md: "1rem" }}
+                  fontWeight="600"
+                  lineHeight="snug"
                 >
-                  {faq.answer}
-                </Box>
-              )}
-            </Box>
+                  <Box role="group" w="100%">
+                    <Box
+                      as="button"
+                      type="button"
+                      id={triggerId}
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      onClick={() => toggleAccordion(index)}
+                      display="flex"
+                      w="100%"
+                      alignItems="flex-start"
+                      justifyContent="space-between"
+                      gap={4}
+                      px={{ base: 5, md: 6 }}
+                      py={{ base: 5, md: 6 }}
+                      cursor="pointer"
+                      border="none"
+                      bg="transparent"
+                      borderTopRadius="2xl"
+                      textAlign="left"
+                      font="inherit"
+                      color="gray.900"
+                      transition="background-color 0.2s ease, box-shadow 0.2s ease"
+                      _hover={{
+                        bg: "gray.50",
+                        boxShadow: "inset 0 0 0 1px rgba(0, 0, 0, 0.04)",
+                      }}
+                      _active={{
+                        bg: "gray.100",
+                      }}
+                      _focus={{ outline: "none" }}
+                      _focusVisible={{
+                        boxShadow:
+                          "inset 0 0 0 1px rgba(0, 0, 0, 0.04), 0 0 0 3px rgba(0, 169, 224, 0.45)",
+                      }}
+                    >
+                      <Box
+                        as="span"
+                        display="block"
+                        flex="1"
+                        pr={1}
+                        transition="color 0.2s ease"
+                        _groupHover={{ color: "black" }}
+                      >
+                        {faq.question}
+                      </Box>
+
+                      <Icon
+                        as={isOpen ? ChevronUpIcon : ChevronDownIcon}
+                        aria-hidden
+                        w={5}
+                        h={5}
+                        mt={0.5}
+                        flexShrink={0}
+                        color="gray.400"
+                        transition="color 0.2s ease, transform 0.2s ease"
+                        _groupHover={{
+                          color: "gray.600",
+                          transform: isOpen ? "translateY(-1px)" : "translateY(2px)",
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </Heading>
+
+                {isOpen && (
+                  <Box
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={triggerId}
+                    px={{ base: 5, md: 6 }}
+                    pb={{ base: 5, md: 6 }}
+                    pt={4}
+                    borderTopWidth="1px"
+                    borderTopColor="gray.100"
+                    color="gray.600"
+                    fontSize={{ base: "0.9375rem", md: "1rem" }}
+                    fontWeight="400"
+                    lineHeight="tall"
+                  >
+                    {faq.answer}
+                  </Box>
+                )}
+              </Box>
             );
           })}
         </VStack>
