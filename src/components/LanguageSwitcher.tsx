@@ -195,11 +195,15 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
         aria-expanded={isOpen}
         aria-controls={isOpen ? menuId : undefined}
       >
-        <FiGlobe aria-hidden="true" className={`w-3.5 h-3.5 ${isDark ? 'text-gray-400' : 'text-gray-600 dark:text-gray-400'}`} />
+        <FiGlobe
+          aria-hidden="true"
+          focusable="false"
+          className={`w-3.5 h-3.5 ${isDark ? 'text-gray-400' : 'text-gray-600 dark:text-gray-400'}`}
+        />
         <span className={`text-xs font-semibold ${isDark ? 'text-gray-300' : 'text-gray-700 dark:text-gray-300'}`}>
           {currentLang}
         </span>
-        <FiChevronDown aria-hidden="true" className={`w-3.5 h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''} ${isDark ? 'text-gray-500' : 'text-gray-500'}`} />
+        <FiChevronDown aria-hidden="true"   focusable="false" className={`w-3.5 h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''} ${isDark ? 'text-gray-500' : 'text-gray-500'}`} />
       </button>
 
       {/* Dropdown Menu */}
@@ -231,7 +235,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
               >
                 <span>{lang.name}</span>
                 {isSelected && (
-                  <FiCheck  aria-hidden="true" className="w-4 h-4 text-[#135bec]" />
+                  <FiCheck  aria-hidden="true" focusable="false" className="w-4 h-4 text-[#135bec]" />
                 )}
               </button>
             );
