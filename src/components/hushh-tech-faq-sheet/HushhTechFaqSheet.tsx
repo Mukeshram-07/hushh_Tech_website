@@ -3,7 +3,7 @@
  * Follows the unified design language: Playfair Display headings,
  * tracking-[0.2em] section headers, hushh-blue accents, ios-green badges.
  */
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useId } from "react";
 
 /* ── FAQ Data ── */
 interface FaqItem {
@@ -100,6 +100,7 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
 }) => {
   const [expandedIdx, setExpandedIdx] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const instanceId = useId();
 
   /* Animate in/out */
   useEffect(() => {
@@ -188,8 +189,8 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
               <div className="border border-gray-200 divide-y divide-gray-100">
                 {category.items.map((item, idx) => {
                   const key = `${category.title}-${idx}`;
-                  const panelId = `faq-panel-${key}`;
-                  const triggerId = `faq-trigger-${key}`;
+                  const panelId = `faq-panel-${instanceId}-${key}`;
+                  const triggerId = `faq-trigger-${instanceId}-${key}`;
                   const isExpanded = expandedIdx === key;
 
                   return (
