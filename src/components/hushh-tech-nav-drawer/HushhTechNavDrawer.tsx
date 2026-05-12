@@ -92,7 +92,10 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
           className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center hover:bg-gray-50 transition-colors"
           aria-label="Close menu"
         >
-          <span className="material-symbols-outlined text-gray-500 !text-[1.2rem]">
+          <span
+            aria-hidden="true"
+            className="material-symbols-outlined text-gray-500 !text-[1.2rem]"
+          >
             close
           </span>
         </button>
@@ -137,7 +140,10 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                 {HIGHLIGHT_ITEM.subtitle}
               </span>
             </div>
-            <span className="ml-auto material-symbols-outlined text-hushh-blue/40 !text-[1rem]">
+            <span
+              aria-hidden="true"
+              className="ml-auto material-symbols-outlined text-hushh-blue/40 !text-[1rem]"
+            >
               arrow_forward
             </span>
           </button>
