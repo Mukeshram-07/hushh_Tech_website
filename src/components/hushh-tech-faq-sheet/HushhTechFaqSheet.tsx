@@ -188,15 +188,19 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
               <div className="border border-gray-200 divide-y divide-gray-100">
                 {category.items.map((item, idx) => {
                   const key = `${category.title}-${idx}`;
+                  const panelId = `faq-panel-${key}`;
+                  const triggerId = `faq-trigger-${key}`;
                   const isExpanded = expandedIdx === key;
 
                   return (
                     <div key={key}>
                       {/* Question row */}
                       <button
-                        onClick={() => handleToggle(key)}
-                        className="w-full flex items-center gap-3 px-4 py-4 text-left hover:bg-gray-50 transition-colors"
-                        aria-expanded={isExpanded}
+                          onClick={() => handleToggle(key)}
+                          className="w-full flex items-center gap-3 px-4 py-4 text-left hover:bg-gray-50 transition-colors"
+                          aria-expanded={isExpanded}
+                          aria-controls={panelId}
+                          id={triggerId}
                       >
                         <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center shrink-0">
                           <span
@@ -221,6 +225,9 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
 
                       {/* Answer — animated */}
                       <div
+                        id={panelId}
+                        role="region"
+                        aria-labelledby={triggerId}
                         className={`overflow-hidden transition-all duration-200 ease-out ${
                           isExpanded ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
                         }`}
