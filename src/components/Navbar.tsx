@@ -287,10 +287,13 @@ export default function Navbar() {
             {/* Mobile Hamburger */}
             {!isDesktop && (
               <button
+                type="button"
                 onClick={toggleDrawer}
                 className="flex items-center justify-center w-11 h-11 rounded-full bg-[#2F80ED] text-white active:scale-95 transition-transform shadow-lg shadow-blue-500/30 hover:bg-blue-600"
-                aria-label="Toggle menu"
-              >
+                aria-label={isOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isOpen}
+                aria-controls="mobile-navigation-drawer"
+              > 
                 <FiMenu className="w-5 h-5" />
               </button>
             )}
@@ -346,17 +349,25 @@ export default function Navbar() {
           onClick={toggleDrawer}
         >
           <div
+            id="mobile-navigation-drawer"
             ref={drawerRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobile-navigation-title"
             className="fixed inset-0 bg-[#F2F2F7] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col min-h-full max-w-md mx-auto w-full px-4 pb-10">
               {/* Header: Menu title + Close button */}
               <div className="flex items-center justify-between pt-14 pb-4 px-0">
-                <h2 className="text-[34px] font-bold text-black tracking-tight leading-none">
+                <h2
+                  id="mobile-navigation-title"
+                  className="text-[34px] font-bold text-black tracking-tight leading-none"
+                >
                   {t('nav.menu', 'Menu')}
                 </h2>
                 <button
+                  type="button"
                   onClick={toggleDrawer}
                   className="w-[30px] h-[30px] flex items-center justify-center rounded-full bg-[#E3E3E8] text-[#8E8E93] active:bg-[#D1D1D6] transition-colors"
                   aria-label="Close menu"
