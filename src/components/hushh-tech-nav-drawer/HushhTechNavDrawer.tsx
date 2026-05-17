@@ -88,6 +88,7 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
           </span>
         </div>
         <button
+          type="button"
           onClick={onClose}
           className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center hover:bg-gray-50 transition-colors"
           aria-label="Close menu"
