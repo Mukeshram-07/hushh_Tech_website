@@ -58,6 +58,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const drawerRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const careerDropdownRef = useRef<HTMLDivElement>(null);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
@@ -199,6 +200,69 @@ export default function Navbar() {
     setShowScrollIndicator(!isNearBottom);
   }, []);
 
+  // Change 2: Helper to get all focusable elements inside the drawer
+  const getFocusableElements = useCallback(() => {
+    if (!drawerRef.current) return [];
+
+    return Array.from(
+      drawerRef.current.querySelectorAll(
+        'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+    ) as HTMLElement[];
+  }, []);
+
+  // Change 3: Focus trap + Escape key + return focus to trigger
+  // Listener is scoped to the drawer element, not document
+  useEffect(() => {
+    if (!isOpen || !drawerRef.current) return;
+
+    const focusableElements = getFocusableElements();
+
+    requestAnimationFrame(() => {
+      focusableElements[0]?.focus();
+    });
+
+    const drawer = drawerRef.current;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const elements = getFocusableElements();
+
+      if (!elements.length) return;
+
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        return;
+      }
+
+      if (e.key === "Tab") {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    drawer.addEventListener(
+      "keydown",
+      handleKeyDown as EventListener
+    );
+
+    return () => {
+      drawer.removeEventListener(
+        "keydown",
+        handleKeyDown as EventListener
+      );
+
+      menuButtonRef.current?.focus();
+    };
+  }, [isOpen, getFocusableElements]);
+
   // Check if menu needs scroll indicator when drawer opens
   useEffect(() => {
     if (isOpen && scrollContainerRef.current) {
@@ -288,9 +352,10 @@ export default function Navbar() {
               </>
             )}
 
-            {/* Mobile Hamburger */}
+            {/* Change 4: Mobile Hamburger — ref added */}
             {!isDesktop && (
               <button
+                ref={menuButtonRef}
                 type="button"
                 onClick={toggleDrawer}
                 className="flex items-center justify-center w-11 h-11 rounded-full bg-[#2F80ED] text-white active:scale-95 transition-transform shadow-lg shadow-blue-500/30 hover:bg-blue-600"
@@ -370,11 +435,12 @@ export default function Navbar() {
                 >
                   {t('nav.menu', 'Menu')}
                 </h2>
+                {/* Change 5: Close button — i18n aria-label */}
                 <button
                   type="button"
                   onClick={toggleDrawer}
                   className="w-[30px] h-[30px] flex items-center justify-center rounded-full bg-[#E3E3E8] text-[#8E8E93] active:bg-[#D1D1D6] transition-colors"
-                  aria-label="Close menu"
+                  aria-label={t('nav.closeMenu', 'Close menu')}
                 >
                   <FiX size={18} strokeWidth={3} />
                 </button>
