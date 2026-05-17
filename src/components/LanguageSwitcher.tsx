@@ -22,30 +22,39 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
   const optionRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const menuId = 'language-switcher-menu';
 
-  // Get current language short code
-  const currentLang = languages.find(l => l.code === i18n.language)?.shortCode || 'EN';
+  const baseLangCode = (i18n.language || 'en').split('-')[0];
+  const currentLangObj = languages.find(l => l.code === baseLangCode) || languages[0];
+  const currentLang = currentLangObj.shortCode;
+
   const currentLangIndex = Math.max(
-    languages.findIndex((language) => language.code === i18n.language),
+    languages.findIndex((language) => language.code === baseLangCode),
     0
   );
+
+  useEffect(() => {
+    if (baseLangCode === 'ar') {
+      document.documentElement.setAttribute('dir', 'rtl');
+      document.documentElement.setAttribute('lang', 'ar');
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr');
+      document.documentElement.setAttribute('lang', baseLangCode);
+    }
+  }, [baseLangCode]);
 
   const closeDropdown = React.useCallback((returnFocus = false) => {
     setIsOpen(false);
     setActiveIndex(-1);
-
     if (returnFocus) {
       triggerRef.current?.focus();
     }
   }, []);
 
-  // Handle click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         closeDropdown();
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -54,21 +63,17 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
 
   useEffect(() => {
     if (!isOpen || activeIndex < 0) return;
-
     optionRefs.current[activeIndex]?.focus();
   }, [activeIndex, isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
-
     const handleDocumentKeyDown = (event: KeyboardEvent) => {
       if (event.key !== 'Escape') return;
       if (!dropdownRef.current?.contains(document.activeElement)) return;
-
       event.preventDefault();
       closeDropdown(true);
     };
-
     document.addEventListener('keydown', handleDocumentKeyDown);
     return () => {
       document.removeEventListener('keydown', handleDocumentKeyDown);
@@ -77,16 +82,6 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
 
   const changeLanguage = React.useCallback((langCode: string) => {
     i18n.changeLanguage(langCode);
-    
-    // Update document direction for RTL languages
-    if (langCode === 'ar') {
-      document.documentElement.setAttribute('dir', 'rtl');
-      document.documentElement.setAttribute('lang', 'ar');
-    } else {
-      document.documentElement.setAttribute('dir', 'ltr');
-      document.documentElement.setAttribute('lang', langCode);
-    }
-    
     closeDropdown(true);
   }, [closeDropdown, i18n]);
 
@@ -100,7 +95,6 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
       closeDropdown();
       return;
     }
-
     setIsOpen(true);
   };
 
@@ -110,19 +104,16 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
       openFromKeyboard(currentLangIndex);
       return;
     }
-
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       openFromKeyboard(currentLangIndex);
       return;
     }
-
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       openFromKeyboard(languages.length - 1);
       return;
     }
-
     if (event.key === 'Escape' && isOpen) {
       event.preventDefault();
       closeDropdown(true);
@@ -139,58 +130,51 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
       closeDropdown(true);
       return;
     }
-
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       setActiveIndex((index + 1) % languages.length);
       return;
     }
-
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       setActiveIndex((index - 1 + languages.length) % languages.length);
       return;
     }
-
     if (event.key === 'Home') {
       event.preventDefault();
       setActiveIndex(0);
       return;
     }
-
     if (event.key === 'End') {
       event.preventDefault();
       setActiveIndex(languages.length - 1);
       return;
     }
-
     if (event.key === 'Tab') {
       closeDropdown();
       return;
     }
-
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       changeLanguage(langCode);
     }
   };
 
-  // Dark variant styles (for dark header)
   const isDark = variant === 'dark';
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Language Selector Pill */}
       <button
         ref={triggerRef}
         onClick={handleTriggerClick}
         onKeyDown={handleTriggerKeyDown}
         className={`group flex h-9 items-center gap-1 px-3 py-1.5 rounded-full transition-colors ${
-          isDark 
-            ? 'bg-gray-800 active:bg-gray-700 border border-gray-700' 
+          isDark
+            ? 'bg-gray-800 active:bg-gray-700 border border-gray-700'
             : 'bg-gray-100 hover:bg-gray-200 border border-transparent dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700'
         }`}
         aria-label="Select language"
+        title={`Change language (${currentLangObj.name})`}
         aria-haspopup="menu"
         aria-expanded={isOpen}
         aria-controls={isOpen ? menuId : undefined}
@@ -203,19 +187,24 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
         <span className={`text-xs font-semibold ${isDark ? 'text-gray-300' : 'text-gray-700 dark:text-gray-300'}`}>
           {currentLang}
         </span>
-        <FiChevronDown aria-hidden="true"   focusable="false" className={`w-3.5 h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''} ${isDark ? 'text-gray-500' : 'text-gray-500'}`} />
+        <FiChevronDown
+          aria-hidden="true"
+          focusable="false"
+          className={`w-3.5 h-3.5 transition-transform ${
+            isOpen ? 'rotate-180' : ''
+          } ${isDark ? 'text-gray-400' : 'text-gray-500 dark:text-gray-400'}`}
+        />
       </button>
 
-      {/* Dropdown Menu */}
       {isOpen && (
         <div
           id={menuId}
           role="menu"
           aria-label="Language options"
-          className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-[200]"
+          className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 py-2 z-[200]"
         >
           {languages.map((lang, index) => {
-            const isSelected = i18n.language === lang.code;
+            const isSelected = baseLangCode === lang.code;
             return (
               <button
                 key={lang.code}
@@ -227,15 +216,15 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
                 aria-checked={isSelected}
                 onClick={() => changeLanguage(lang.code)}
                 onKeyDown={(event) => handleOptionKeyDown(event, index, lang.code)}
-                className={`w-full flex items-center justify-between px-4 py-2.5 text-left text-sm transition-colors
-                  ${isSelected 
-                    ? 'bg-[#135bec]/5 text-[#135bec] font-semibold' 
-                    : 'text-gray-700 hover:bg-gray-50'
+                className={`w-full flex items-center justify-between px-4 py-2.5 text-left text-sm transition-colors focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700
+                  ${isSelected
+                    ? 'bg-[#135bec]/5 text-[#135bec] font-semibold dark:bg-[#135bec]/20 dark:text-[#5b8ef2]'
+                    : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700'
                   }`}
               >
                 <span>{lang.name}</span>
                 {isSelected && (
-                  <FiCheck  aria-hidden="true" focusable="false" className="w-4 h-4 text-[#135bec]" />
+                  <FiCheck aria-hidden="true" focusable="false" className="w-4 h-4 text-[#135bec]" />
                 )}
               </button>
             );
