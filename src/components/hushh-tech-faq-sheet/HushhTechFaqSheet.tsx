@@ -1,133 +1,32 @@
-/**
- * HushhTechFaqSheet — Bottom sheet with accordion FAQs.
- * Follows the unified design language: Playfair Display headings,
- * tracking-[0.2em] section headers, hushh-blue accents, ios-green badges.
- */
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  useId,
-} from "react";
-import { useModalKeyboardNavigation } from "../../hooks/useModalKeyboardNavigation";
-
-/* ── FAQ Data ── */
-interface FaqItem {
-  q: string;
-  a: string;
-}
-
-interface FaqCategory {
-  title: string;
-  items: FaqItem[];
-}
-
-const FAQ_DATA: FaqCategory[] = [
-  {
-    title: "Onboarding",
-    items: [
-      {
-        q: "What is KYC verification?",
-        a: "KYC (Know Your Customer) is a regulatory requirement that verifies your identity before you can invest. We collect basic personal and financial information to ensure compliance with SEC regulations.",
-      },
-      {
-        q: "How long does onboarding take?",
-        a: "Most users complete the full onboarding process in under 5 minutes. If you need to gather documents, you can save your progress and return anytime.",
-      },
-      {
-        q: "Can I skip steps and come back later?",
-        a: "Yes — some steps can be skipped. However, all required verifications must be completed before you can make your first investment.",
-      },
-      {
-        q: "What are Hushh Coins?",
-        a: "Hushh Coins are reward tokens you earn during onboarding and by engaging with the platform. They can be redeemed for premium features and reduced fees.",
-      },
-    ],
-  },
-  {
-    title: "Investment",
-    items: [
-      {
-        q: "What is Hushh Fund A?",
-        a: "Hushh Fund A (27FCF) is our flagship AI-driven quantitative fund. It uses proprietary algorithms to identify market opportunities while managing risk through diversification.",
-      },
-      {
-        q: "What is the minimum investment?",
-        a: "The minimum investment varies by investor type. Accredited investors can start with as little as $25,000. Please refer to the fund documents for full details.",
-      },
-      {
-        q: "How do I track my investment performance?",
-        a: "Once invested, you'll have access to a real-time dashboard showing your portfolio performance, returns, and detailed analytics — all from your profile.",
-      },
-    ],
-  },
-  {
-    title: "Security & Privacy",
-    items: [
-      {
-        q: "How is my data protected?",
-        a: "All data is encrypted with 256-bit AES encryption in transit and at rest. We use bank-grade security infrastructure and are fully GDPR and SOC 2 compliant.",
-      },
-      {
-        q: "Who can see my financial information?",
-        a: "Your financial data is strictly confidential. Only authorized compliance personnel can access it for regulatory purposes. It is never shared with third parties for marketing.",
-      },
-      {
-        q: "What is the NDA I signed?",
-        a: "The Non-Disclosure Agreement protects confidential investment strategies and fund performance data shared with you. It's standard practice for private investment funds.",
-      },
-    ],
-  },
-  {
-    title: "Account",
-    items: [
-      {
-        q: "How do I update my profile?",
-        a: "Navigate to your Profile from the bottom navigation bar. You can edit your personal details, investment preferences, and notification settings at any time.",
-      },
-      {
-        q: "Can I delete my account?",
-        a: "Yes. Go to Profile → Settings → Delete Account. Please note that active investments must be redeemed before account deletion can be processed.",
-      },
-    ],
-  },
-];
-
-const getFaqItemKey = (categoryTitle: string, itemIndex: number) =>
-  `${categoryTitle
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")}-${itemIndex}`;
-
-/* ── Props ── */
-interface HushhTechFaqSheetProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-/* ── Component ── */
 const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
   isOpen,
   onClose,
 }) => {
   const [expandedIdx, setExpandedIdx] = useState<string | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+
+  // Updated typing fix
+  const [isVisible, setIsVisible] = useState<boolean>(isOpen);
 
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const instanceId = useId();
 
-  /* Animate in/out */
   useEffect(() => {
+    let frameId: number | undefined;
+
     if (isOpen) {
-      requestAnimationFrame(() => setIsVisible(true));
-    } else {
-      setIsVisible(false);
+      frameId = requestAnimationFrame(() => {
+        setIsVisible(true);
+      });
     }
+
+    return () => {
+      if (frameId !== undefined) {
+        cancelAnimationFrame(frameId);
+      }
+    };
   }, [isOpen]);
 
-  /* Lock body scroll */
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -163,7 +62,6 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
       aria-modal="true"
       aria-labelledby="hushh-tech-faq-title"
     >
-      {/* Backdrop */}
       <div
         className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${
           isVisible ? "opacity-100" : "opacity-0"
@@ -171,7 +69,6 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
         onClick={handleBackdropClick}
       />
 
-      {/* Sheet */}
       <div
         ref={sheetRef}
         className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[85vh] flex flex-col transition-transform duration-300 ease-out ${
@@ -180,12 +77,10 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
         aria-labelledby="hushh-tech-faq-title"
         tabIndex={-1}
       >
-        {/* Drag handle */}
         <div className="flex justify-center pt-3 pb-1">
           <div className="w-10 h-1 rounded-full bg-gray-300" />
         </div>
 
-        {/* Header */}
         <div className="px-6 pt-2 pb-4 flex items-center justify-between border-b border-gray-100">
           <h2
             id="hushh-tech-faq-title"
@@ -213,7 +108,6 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
           </button>
         </div>
 
-        {/* Scrollable FAQ content */}
         <div className="flex-1 overflow-y-auto px-6 pb-10 scrollbar-thin">
           {FAQ_DATA.map((category) => (
             <section key={category.title} className="mt-6">
@@ -231,7 +125,6 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
 
                   return (
                     <div key={key}>
-                      {/* Question row */}
                       <button
                         id={triggerId}
                         onClick={() => handleToggle(key)}
@@ -262,7 +155,6 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
                         </span>
                       </button>
 
-                      {/* Answer — animated */}
                       <div
                         id={panelId}
                         role="region"
@@ -285,7 +177,6 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
             </section>
           ))}
 
-          {/* Help footer */}
           <div className="mt-8 mb-4 flex flex-col items-center text-center gap-2">
             <div className="flex items-center gap-1.5">
               <span
